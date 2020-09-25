@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Irregular Verbs Quiz</title>
+        <link rel="stylesheet" href="css/style.css">
+        <body>
+            <div class="container" type="title">
+                <h1>Irregular Verbs Quiz</h1>
+            </div>
+
+            <!-- Buttons for creating or loading students -->
+
+            <div class="container" type="file">
+                <button class="btn-white" id="new-student">New student</button>
+                <input type="file" name="input_file">
+            </div>
+            
+            <br>
+
+            <!-- Data of the student who is currently playing the game -->
+
+            <div id="student_name">
+                Student:
+            </div>
+
+            <div id="learned_words">
+                Learned words:
+            </div>
+
+            <br>
+
+            <!-- Quiz area -->
+
+            <div class="container" type="action" id="start_quiz">
+                <button class="btn-gray">Start quiz</button>
+            </div>
+
+            <br>
+
+            <label>Word number:</label>
+            <label for="word_no">0</label>
+
+            <ul><label>Infinitive:</label></ul>
+            <ul><label>Past Simple:</label></ul>
+            <ul><label>Past Participle:</label></ul>
+
+            <label for="correct_pct">Correct Answers: 0%</label>
+
+            <br>
+
+            <br>
+
+            <div class="container" type="results">
+                <button class="btn-gray" id="btn-show-answer">SHOW ANSWER</button>
+            </div>
+
+            <br>
+
+            <div class="container" type="results">
+                <button class="btn-green" id="btn-correct">CORRECT</button>
+                <button class="btn-red" id="btn-incorrect">INCORRECT</button>
+            </div>
+
+            <br>
+            
+            <div class="container">
+                <button class="btn-orange" id="btn-save">SAVE AND FINISH</button>
+            </div>
+
+            <script src="js/file.js"></script>
+        </body>
+    </head>
+</html>

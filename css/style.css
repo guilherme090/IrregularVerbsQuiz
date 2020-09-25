@@ -1,0 +1,49 @@
+.btn-black {
+    background-color: black;
+    color: white;
+}
+
+.btn-brown {
+    background-color: brown; 
+    color: white;
+}
+
+.btn-red {
+    background-color: red; 
+    color: white;
+}
+
+.btn-orange {
+    background-color: orange; 
+    color: black;
+}
+
+.btn-yellow {
+    background-color: yellow; 
+    color: black;
+}
+
+.btn-green {
+    background-color: green; 
+    color: white;
+}
+       
+.btn-blue {
+    background-color: blue; 
+    color: white;
+}
+
+.btn-violet {
+    background-color: violet;
+    color: black;
+}
+
+.btn-gray {
+    background-color: gray; 
+    color: white;
+}
+
+.btn-white {
+    background-color: white;
+    color: black;
+}
