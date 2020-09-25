@@ -44,7 +44,7 @@ All the buttons of the interface
 let newStudentBtn = document.querySelector('#new-student');
 newStudentBtn.onclick = function(){
     // Erase reference to current student, if any.
-    loadButton.value = null;
+    loadBtn.value = null;
 
     //console.log("Botão clicado. Novo estudante será adicionado.");
     aluno.name = 'Nome Legal';
@@ -81,8 +81,8 @@ incorrectBtn.onclick = function(){
 
 var txtRead = [];
 
-const loadButton = document.querySelector('#input-file');
-loadButton.addEventListener('input', function(e){
+const loadBtn = document.querySelector('#input-file');
+loadBtn.addEventListener('input', function(e){
     var fr = new FileReader();
     fr.onload = function(){
         //console.log(fr.result);
@@ -94,3 +94,15 @@ loadButton.addEventListener('input', function(e){
     fr.readAsText(this.files[0]);
     //console.log(txtRead);
 });
+
+// File Writing
+
+//const fs = require('fs'); // requiring fs module to use writeFile
+
+const saveBtn = document.querySelector('#btn-save');
+saveBtn.onclick = function(){
+    let data = studentName.innerHTML + '*' + studentLearnedWords.innerHTML;
+    let blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, studentName.innerHTML + ".txt"); // using function from external code downloaded from github
+}
+
