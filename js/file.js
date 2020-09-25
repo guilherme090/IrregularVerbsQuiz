@@ -43,7 +43,10 @@ All the buttons of the interface
 
 let newStudentBtn = document.querySelector('#new-student');
 newStudentBtn.onclick = function(){
-    console.log("Botão clicado. Novo estudante será adicionado.");
+    // Erase reference to current student, if any.
+    loadButton.value = null;
+
+    //console.log("Botão clicado. Novo estudante será adicionado.");
     aluno.name = 'Nome Legal';
     aluno.words_learned = 20;
     console.log(aluno);
@@ -72,3 +75,22 @@ incorrectBtn.onclick = function(){
     wordNumber.innerHTML++;
     updateStudentScore();
 };
+
+
+// File Reading
+
+var txtRead = [];
+
+const loadButton = document.querySelector('#input-file');
+loadButton.addEventListener('input', function(e){
+    var fr = new FileReader();
+    fr.onload = function(){
+        //console.log(fr.result);
+        txtRead = (fr.result.split('*'));
+        //console.log(txtRead);
+        studentName.innerHTML = txtRead[0];
+        studentLearnedWords.innerHTML = txtRead[1];
+    }
+    fr.readAsText(this.files[0]);
+    //console.log(txtRead);
+});
