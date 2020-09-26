@@ -190,3 +190,59 @@ function stateMachine(currentState){
             break;
     }
 }
+
+/* 
+----------------------------------------------------------------------------------
+The verbs
+----------------------------------------------------------------------------------
+Data structure to store the irregular verbs.
+*/ 
+
+class verb {
+    constructor(infinitive, past_simple, past_participle){
+        this.infinitive = infinitive;
+        this.past_simple = past_simple;
+        this. past_participle = past_participle;
+    }
+}
+
+const listOfVerbs = []; // stores all verbs that are in the txt file loaded as verb list.
+const listOfIndices = []; // stores only numbers that point to a position in the listOfVerbs. Will lose elements as verbs are sorted.
+
+const loadListBtn = document.querySelector('#word-list');
+loadListBtn.addEventListener('input', function(e){
+    var fr2 = new FileReader();
+    fr2.onload = function(){
+        let verbsRead = (fr2.result.split('*'));
+
+        console.log(verbsRead);
+
+        verbsRead.forEach(verbForm => {
+            let singleVerb = verbForm.split('#');
+            listOfVerbs.push(new verb(singleVerb[0], singleVerb[1], singleVerb[2]));   
+        });
+
+        console.log(listOfVerbs);
+        createListOfIndices(listOfVerbs, listOfIndices);
+        console.log(listOfIndices);
+    }
+    fr2.readAsText(this.files[0]);
+});
+
+function createListOfIndices(currentListOfVerbs, currentListOfIndices){  
+    /*
+    List of verbs is an immutable array, so that the quiz can be played several times without erasing many data structures.
+    So, we create a list containing just indexes that will be taken out as they are shuffled and refilled when quiz must
+    be played again.
+    */
+
+    currentListOfIndices.splice(0, currentListOfIndices.length); // erase everything that is on the array.
+
+    // Create list of indices related to the list of verbs.
+    for(let i = 0; i < currentListOfVerbs.length; i++){
+        currentListOfIndices.push(i);
+    }
+}
+
+
+
