@@ -141,7 +141,14 @@ saveBtn.onclick = function(){
     wordNumber.innerHTML = 0;
 }
 
-// State machine
+/* 
+----------------------------------------------------------------------------------
+State Machine
+----------------------------------------------------------------------------------
+This part of the code configures every button that must be activated or
+deactivated depending on the program's state to prevent users from activating
+forbidden functions (like starting a quiz without a verb list).
+*/ 
 
 const states = {
     REGISTER_STUDENT: 'register-student',
@@ -255,7 +262,16 @@ const loadListBtn = document.querySelector('#word-list');
 loadListBtn.addEventListener('input', function(e){
     var fr2 = new FileReader();
     fr2.onload = function(){
-        let verbsRead = (fr2.result.split('*'));
+        /*
+        The .txt file will separate each verb with '*' and each groups of conjugations
+        of the same verb with '#'. there might be new line characters in the read file.
+        */
+
+        // remove any kind of line break that may appear
+        
+        let verbsReadWithLineBreak = fr2.result.replace(/(\r\n|\n|\r)/gm,""); 
+
+        let verbsRead = verbsReadWithLineBreak.split('*');
 
         console.log(verbsRead);
 
@@ -293,7 +309,7 @@ function shuffleVerb(currentListOfVerbs, currentWordCount){
     // the number of verbs that were already taken is the current wordCount - 1.
     let takenVerbs = Number(currentWordCount.innerHTML) - 1;
     console.log('Word count = ' + takenVerbs);
-    let shuffledNumber = Math.floor(Math.random() * (currentListOfVerbs.length - takenVerbs)); 
+    let shuffledNumber = Math.floor(Math.random() * (Number(studentLearnedWords.innerHTML) - takenVerbs)); 
     console.log('shuffled number = ' + shuffledNumber);
     // Scan the whole list of verbs to point to a non-taken verb in sorted position
     for(let i = 0; i < shuffledNumber || currentListOfVerbs[i].taken === true ; i++){
