@@ -34,7 +34,12 @@ let pastParticipleAnswer = document.querySelector('#answer-past-participle');
 
 // Update functions
 function updateStudentScore(){
-    correctPct.innerHTML = (aluno.words_right / aluno.words_total * 100).toFixed(2); 
+    if(aluno.words_total === 0){
+        correctPct.innerHTML = '0.00';
+    }
+    else{
+        correctPct.innerHTML = (aluno.words_right / aluno.words_total * 100).toFixed(2); 
+    } 
 }
 
 /* 
@@ -64,6 +69,9 @@ let startBtn = document.querySelector('#btn-start');
 startBtn.onclick = function(){
     wordNumber.innerHTML = 1;
     resetVerbList(listOfVerbs);
+    // Initialize score
+    resetStudentScore();
+    updateStudentScore();
     stateMachine(states.QUIZ_STARTED_NO_ANSWER);
 }
 
@@ -152,9 +160,14 @@ saveBtn.onclick = function(){
     let data = studentName.innerHTML + '*' + studentLearnedWords.innerHTML;
     let blob = new Blob([data], {type: "text/plain;charset=utf-8"});
     saveAs(blob, studentName.innerHTML + ".txt"); // using function from external code downloaded from github
-    // Reset state machine
+    // Reset state machine and student score
     stateMachine(states.STUDENT_REGISTERED);
     wordNumber.innerHTML = 0;
+    infinitiveAnswer.innerHTML = '';
+    pastSimpleAnswer.innerHTML = '';
+    pastParticipleAnswer.innerHTML = '';
+    resetStudentScore();
+    updateStudentScore();
 }
 
 /* 
@@ -316,6 +329,13 @@ function resetVerbList(theListOfVerbs){
         }
     );
 }
+
+function resetStudentScore(){
+    aluno.words_right = 0;
+    aluno.words_total = 0;
+}
+
+
 
 let shuffledIndex = 0; // Initialize shuffled number
 
