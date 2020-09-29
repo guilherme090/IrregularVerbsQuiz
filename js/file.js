@@ -72,20 +72,36 @@ correctBtn.onclick = function(){
     aluno.words_right ++;
     aluno.words_total ++;
     console.log(aluno);
-    wordNumber.innerHTML++;
     updateStudentScore();
-    // Signal to the state machine that new word is ready
-    stateMachine(states.QUIZ_STARTED_NO_ANSWER);
+    // Check if all words were already taken. No new words to show.
+    if(aluno.words_total >= Number(studentLearnedWords.innerHTML))
+    {
+        stateMachine(states.NO_MORE_WORDS);
+    }
+    else{
+        // Student still has verbs to see. Show next verb.
+        wordNumber.innerHTML = aluno.words_total + 1;
+        // Signal to the state machine that new word is ready
+        stateMachine(states.QUIZ_STARTED_NO_ANSWER);
+    }
 };
 
 let incorrectBtn = document.querySelector('#btn-incorrect');
 incorrectBtn.onclick = function(){
     aluno.words_total ++;
     console.log(aluno);
-    wordNumber.innerHTML++;
     updateStudentScore();
-    // Signal to the state machine that new word is ready
-    stateMachine(states.QUIZ_STARTED_NO_ANSWER);
+    // Check if all words were already taken. No new words to show.
+    if(aluno.words_total >= Number(studentLearnedWords.innerHTML))
+    {
+        stateMachine(states.NO_MORE_WORDS);
+    }
+    else{
+        // Student still has verbs to see. Show next verb.
+        wordNumber.innerHTML = aluno.words_total + 1;
+        // Signal to the state machine that new word is ready
+        stateMachine(states.QUIZ_STARTED_NO_ANSWER);
+    }
 };
 
 let showAnsBtn = document.querySelector('#btn-show-answer');
@@ -158,7 +174,6 @@ const states = {
     NO_MORE_WORDS: 'no-more-words'
 };
 
-//let currentState = states.REGISTER_STUDENT;
 stateMachine(states.REGISTER_STUDENT);
 
 function stateMachine(currentState){
