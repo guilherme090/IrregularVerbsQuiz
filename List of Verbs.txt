@@ -47,4 +47,10 @@ rise#rose#risen*
 drive#drove#driven*
 buy#bought#bought*
 wear#wore#worn*
-choose#chose#chosen
+choose#chose#chosen*
+win#won#won*
+forget#forgot#forgotten*
+lay#laid#laid*
+sell#sold#sold*
+fight#fought#fought*
+bear#bore#born

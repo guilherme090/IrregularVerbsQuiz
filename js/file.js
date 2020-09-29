@@ -24,6 +24,10 @@ Labels that will store the student's data.
 let studentName = document.querySelector('#student-name');
 let studentLearnedWords = document.querySelector('#learned-words');
 
+// Message board
+
+let messageBoard = document.querySelector('#message');
+
 // Quiz area
 
 let wordNumber = document.querySelector('#word-no');
@@ -65,14 +69,50 @@ newStudentBtn.onclick = function(){
     stateMachine(states.STUDENT_REGISTERED);
 };
 
+const listOfVerbs = []; // stores all verbs that are in the txt file loaded as verb list.
+
+const loadListBtn = document.querySelector('#word-list');
+loadListBtn.addEventListener('input', function(e){
+    var fr2 = new FileReader();
+    fr2.onload = function(){
+        /*
+        The .txt file will separate each verb with '*' and each groups of conjugations
+        of the same verb with '#'. there might be new line characters in the read file.
+        */
+
+        // remove any kind of line break that may appear
+        
+        let verbsReadWithLineBreak = fr2.result.replace(/(\r\n|\n|\r)/gm,""); 
+
+        let verbsRead = verbsReadWithLineBreak.split('*');
+
+        console.log(verbsRead);
+
+        verbsRead.forEach(verbForm => {
+            let singleVerb = verbForm.split('#');
+            listOfVerbs.push(new verb(singleVerb[0], singleVerb[1], singleVerb[2], false));   
+        });
+
+        console.log(listOfVerbs);
+    }
+    fr2.readAsText(this.files[0]);
+});
+
 let startBtn = document.querySelector('#btn-start');
 startBtn.onclick = function(){
-    wordNumber.innerHTML = 1;
-    resetVerbList(listOfVerbs);
-    // Initialize score
-    resetStudentScore();
-    updateStudentScore();
-    stateMachine(states.QUIZ_STARTED_NO_ANSWER);
+    // Only start the quiz if there is a list of verbs loaded to the system.
+    if(listOfVerbs.length > 0){
+        wordNumber.innerHTML = 1;
+        resetVerbList(listOfVerbs);
+        // Initialize score
+        resetStudentScore();
+        updateStudentScore();
+        stateMachine(states.QUIZ_STARTED_NO_ANSWER);
+    }
+    else{
+        alert('Cannot start quiz because there are no verbs to be shown. Load a valid list of verbs to the application.');
+    }
+    
 }
 
 let correctBtn = document.querySelector('#btn-correct');
@@ -195,8 +235,10 @@ function stateMachine(currentState){
     }
     switch(currentState){
         case states.REGISTER_STUDENT:
+            messageBoard.innerHTML = 'Load a student file or create new student data with the NEW STUDENT button.';
             newStudentBtn.disabled = false;
             loadBtn.disabled = false;
+            loadListBtn.disabled = false;
             startBtn.disabled = true;
             showAnsBtn.disabled = true;
             correctBtn.disabled = true;
@@ -204,8 +246,10 @@ function stateMachine(currentState){
             saveBtn.disabled = true;
             break;
         case states.STUDENT_REGISTERED:
+            messageBoard.innerHTML = 'Student data was loaded. Load a list of verbs file and start the quiz anyutime.';
             newStudentBtn.disabled = false;
             loadBtn.disabled = false;
+            loadListBtn.disabled = false;
             startBtn.disabled = false;
             showAnsBtn.disabled = true;
             correctBtn.disabled = true;
@@ -213,11 +257,13 @@ function stateMachine(currentState){
             saveBtn.disabled = true;
             break;
         case states.QUIZ_STARTED_NO_ANSWER:
+            messageBoard.innerHTML = 'What are the past simple and past participle forms of the chosen verb?';
             shuffledIndex = shuffleVerb(listOfVerbs, wordNumber);
             console.log(shuffledIndex);
             showInfinitive(infinitiveAnswer, pastSimpleAnswer, pastParticipleAnswer, listOfVerbs, shuffledIndex);
             newStudentBtn.disabled = true;
             loadBtn.disabled = true;
+            loadListBtn.disabled = true;
             startBtn.disabled = true;
             showAnsBtn.disabled = false;
             correctBtn.disabled = true;
@@ -225,9 +271,11 @@ function stateMachine(currentState){
             saveBtn.disabled = false;
             break;
         case states.QUIZ_STARTED_ANSWER_SHOWN:
+            messageBoard.innerHTML = 'Was the given answer correct or incorrect?';
             showPast(infinitiveAnswer, pastSimpleAnswer, pastParticipleAnswer, listOfVerbs, shuffledIndex);
             newStudentBtn.disabled = true;
             loadBtn.disabled = true;
+            loadListBtn.disabled = true;
             startBtn.disabled = true;
             showAnsBtn.disabled = true;
             correctBtn.disabled = false;
@@ -235,8 +283,10 @@ function stateMachine(currentState){
             saveBtn.disabled = false;
             break;
         case states.NO_MORE_WORDS:
+            messageBoard.innerHTML = 'There are no more words to show. Press SAVE AND FINISH to create a new quiz.';
             newStudentBtn.disabled = true;
             loadBtn.disabled = true;
+            loadListBtn.disabled = true;
             startBtn.disabled = true;
             showAnsBtn.disabled = true;
             correctBtn.disabled = true;
@@ -283,35 +333,6 @@ class verb {
         this._taken = newTaken;
     }
 }
-
-const listOfVerbs = []; // stores all verbs that are in the txt file loaded as verb list.
-
-const loadListBtn = document.querySelector('#word-list');
-loadListBtn.addEventListener('input', function(e){
-    var fr2 = new FileReader();
-    fr2.onload = function(){
-        /*
-        The .txt file will separate each verb with '*' and each groups of conjugations
-        of the same verb with '#'. there might be new line characters in the read file.
-        */
-
-        // remove any kind of line break that may appear
-        
-        let verbsReadWithLineBreak = fr2.result.replace(/(\r\n|\n|\r)/gm,""); 
-
-        let verbsRead = verbsReadWithLineBreak.split('*');
-
-        console.log(verbsRead);
-
-        verbsRead.forEach(verbForm => {
-            let singleVerb = verbForm.split('#');
-            listOfVerbs.push(new verb(singleVerb[0], singleVerb[1], singleVerb[2], false));   
-        });
-
-        console.log(listOfVerbs);
-    }
-    fr2.readAsText(this.files[0]);
-});
 
 /*
 ----------------------------------------------------------------------------------
