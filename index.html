@@ -5,85 +5,69 @@
         <title>Irregular Verbs Quiz</title>
         <link rel="stylesheet" href="css/style.css">
         <body>
-            <div class="container" type="title">
+            <div class="container" type="title" id="title-box">
                 <h1>Irregular Verbs Quiz</h1>
             </div>
 
             <!-- Buttons for creating or loading students -->
 
-            <div class="container" type="file">
-                <button class="btn-white" id="new-student">New student</button>
-                <input type="file" id="input-file">
+            <div class="container" type="file" id="student-data">
+                    <label>Load student data: </label>
+                    <button class="btn-white" id="new-student">New student</button>
+                    <input type="file" id="input-file">
+
+                    <!-- Data of the student who is currently playing the game -->
+
+                <div>
+                    <label>Student: </label><label id="student-name">-</label>
+                    <br>
+                    <label>Learned words: </label><label id="learned-words">-</label>
+                </div>
             </div>
 
             <br>
 
             <!-- Button for loading verb list -->
 
-            <div class="container" type="file">
+            <div class="container" type="file" id="verb-list">
+                <label>Load verb list: </label>
                 <input type="file" id="word-list">
             </div>
             
             <br>
 
-            <!-- Message board -->
-
-            <div class="container" type="message-board">
-                <article id="message">
-                    Message Board.
-                </article>
-            </div>
-
-            <br>
-
-            <!-- Data of the student who is currently playing the game -->
-
-            <div>
-                <label>Student: </label><label id="student-name">-</label>
-            </div>
-
-            <div>
-                <label>Learned words: </label><label id="learned-words">-</label>
-            </div>
-
-            <br>
-
             <!-- Quiz area -->
+            <div class="container" id="quiz-area">
+                <div class="container" type="action" id="btn-start-area">
+                    <button class="btn-gray" id="btn-start">START QUIZ</button>
+                </div>
 
-            <div class="container" type="action">
-                <button class="btn-gray" id="btn-start">START QUIZ</button>
+                <div class="container" id="quiz-labels">
+                    <label>Word number: </label><label id="word-no"> 0</label>
+
+                    <ul><label>Infinitive:</label> <label id="answer-infinitive"></label></ul>
+                    <ul><label>Past Simple:</label> <label id="answer-past-simple"></label></ul>
+                    <ul><label>Past Participle:</label> <label id="answer-past-participle"></label></ul>
+        
+                    <label>Correct Answers:</label> <label id="correct-pct">0.00</label><label>%</label>
+                </div>
+                <div class="container" id="message-board">
+                    <article id="message">
+                        Message Board.
+                    </article>
+                </div>
             </div>
 
-            <br>
-
-            <label>Word number: </label><label id="word-no"> 0</label>
-
-            <ul><label>Infinitive:</label> <label id="answer-infinitive"></label></ul>
-            <ul><label>Past Simple:</label> <label id="answer-past-simple"></label></ul>
-            <ul><label>Past Participle:</label> <label id="answer-past-participle"></label></ul>
-
-            <label>Correct Answers:</label> <label id="correct-pct">0.00</label><label>%</label>
-
-            <br>
-
-            <br>
-
-            <div class="container" type="results">
-                <button class="btn-gray" id="btn-show-answer">SHOW ANSWER</button>
-            </div>
-
-            <br>
-
-            <div class="container" type="results">
-                <button class="btn-green" id="btn-correct">CORRECT</button>
-                <button class="btn-red" id="btn-incorrect">INCORRECT</button>
-            </div>
-
-            <br>
-            
-            <div class="container">
-                <button class="btn-orange" id="btn-save">SAVE AND FINISH</button>
-            </div>
+            <div class="container" id="final-buttons">
+                <div class="container" id="results">
+                    <button class="btn-gray" id="btn-show-answer">SHOW ANSWER</button>
+                    <button class="btn-green" id="btn-correct">CORRECT</button>
+                    <button class="btn-red" id="btn-incorrect">INCORRECT</button>
+                </div>
+                <div class="container" id="finish">
+                    <button class="btn-orange" id="btn-save">SAVE AND FINISH</button>
+                </div>
+            </div>        
 
             <!-- Controlling index.html itself -->
             <script src="js/file.js"></script> 

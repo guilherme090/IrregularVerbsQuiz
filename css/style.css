@@ -1,3 +1,80 @@
+#title-box{
+    background-image: url("images/background.png");
+    background-repeat: repeat-x;
+    color: goldenrod;
+    height: 40px;
+}
+
+#student-data{
+    position: relative;
+    top:10px;
+    left:5px;
+}
+
+#verb-list{
+    position: relative;
+    top:10px;
+    left:5px;
+}
+
+#quiz-area{
+    position: relative;
+    height: 200px;
+}
+
+#btn-start-area{
+    position: absolute;
+    left:5px;
+    width: 10%;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+#quiz-labels{
+    position: absolute;
+    left: 110px;
+    width: 40%;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+#message-board{
+    position:relative;
+    border: 3px solid goldenrod;
+    left: 400px;
+    /* margin-left: auto; */
+    width: 400px;
+    height: 150px;
+    top: 50%;
+    transform: translate(0, -50%);
+    background-color: black;
+}
+
+#message{
+    position:absolute;
+    width: 250px;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+#final-buttons{
+    position: relative;
+}
+
+#results{
+    position: absolute;
+    margin-right: auto;
+}
+
+#finish{
+    position: absolute;
+    left: 540px;
+    width: 200px;
+}
+
 .btn-black {
     background-color: black;
     color: white;
@@ -9,7 +86,13 @@
 }
 
 .btn-red {
-    background-color: red; 
+    background-color: rgb(70, 0, 0); 
+    color: white;
+    border-radius: 5px;
+}
+
+.btn-red:hover {
+    background-color: rgb(255, 0, 0); 
     color: white;
 }
 
@@ -24,8 +107,14 @@
 }
 
 .btn-green {
-    background-color: green; 
-    color: white;
+    background-color: rgb(0, 70, 0); 
+    color: white;   
+    border-radius: 5px; 
+}
+
+.btn-green:hover {
+    background-color: rgb(0, 200, 0); 
+    color: white; 
 }
        
 .btn-blue {
