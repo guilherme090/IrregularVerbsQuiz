@@ -1,6 +1,6 @@
 /*
 ----------------------------------------------------------------------------------
-Objects
+Objects and variables
 ----------------------------------------------------------------------------------
 Store current and total scores.
 */
@@ -11,6 +11,8 @@ const aluno = {
     words_right: 0,
     words_total: 0
 }
+
+let logMessage = ''; // stores correct and incorrect values during the quiz
 
 /* 
 ----------------------------------------------------------------------------------
@@ -107,6 +109,7 @@ startBtn.onclick = function(){
         // Initialize score
         resetStudentScore();
         updateStudentScore();
+        logMessage = studentName.innerHTML + '*' + studentLearnedWords.innerHTML + '*\n\nQUIZ LOG:\n\n';
         stateMachine(states.QUIZ_STARTED_NO_ANSWER);
     }
     else{
@@ -121,6 +124,8 @@ correctBtn.onclick = function(){
     aluno.words_total ++;
     console.log(aluno);
     updateStudentScore();
+    logMessage = logMessage.concat('|' + infinitiveAnswer.innerHTML + '|' + 
+        pastSimpleAnswer.innerHTML + '|' + pastParticipleAnswer.innerHTML + '|' + ' >>> (correct)' + '\n');
     // Check if all words were already taken. No new words to show.
     if(aluno.words_total >= Number(studentLearnedWords.innerHTML))
     {
@@ -139,6 +144,8 @@ incorrectBtn.onclick = function(){
     aluno.words_total ++;
     console.log(aluno);
     updateStudentScore();
+    logMessage = logMessage.concat('*|' + infinitiveAnswer.innerHTML + '|' + 
+    pastSimpleAnswer.innerHTML + '|' + pastParticipleAnswer.innerHTML + '|' + ' >>> (incorrect)' + '\n');
     // Check if all words were already taken. No new words to show.
     if(aluno.words_total >= Number(studentLearnedWords.innerHTML))
     {
@@ -197,8 +204,12 @@ const saveBtn = document.querySelector('#btn-save');
 saveBtn.onclick = function(){
     // Mount text file using * separators;
      
-    let data = studentName.innerHTML + '*' + studentLearnedWords.innerHTML;
-    let blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+    //let data = studentName.innerHTML + '*' + studentLearnedWords.innerHTML;
+    logMessage = logMessage.concat('\n' + 'Words correct: ' + aluno.words_right + '\n' + 
+        'Words incorrect: ' + String(aluno.words_total - aluno.words_right) + '\n' +
+        'Total number of words: ' + aluno.words_total + '\n' +
+        'Score: ' + String((aluno.words_right * 100 / aluno.words_total).toFixed(2)) + '%\n' );
+    let blob = new Blob([logMessage], {type: "text/plain;charset=utf-8"});
     saveAs(blob, studentName.innerHTML + ".txt"); // using function from external code downloaded from github
     // Reset state machine and student score
     stateMachine(states.STUDENT_REGISTERED);
@@ -246,7 +257,7 @@ function stateMachine(currentState){
             saveBtn.disabled = true;
             break;
         case states.STUDENT_REGISTERED:
-            messageBoard.innerHTML = 'Student data was loaded. Load a list of verbs file and start the quiz anyutime.';
+            messageBoard.innerHTML = 'Student data was loaded. Load a list of verbs file and start the quiz anytime.';
             newStudentBtn.disabled = false;
             loadBtn.disabled = false;
             loadListBtn.disabled = false;
