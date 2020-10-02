@@ -248,24 +248,36 @@ function stateMachine(currentState){
         case states.REGISTER_STUDENT:
             messageBoard.innerHTML = 'Load a student file or create new student data with the NEW STUDENT button.';
             newStudentBtn.disabled = false;
+            newStudentBtn.style.backgroundColor="#DDDD00";
             loadBtn.disabled = false;
             loadListBtn.disabled = false;
             startBtn.disabled = true;
+            startBtn.style.backgroundColor="#555500";
             showAnsBtn.disabled = true;
+            showAnsBtn.style.backgroundColor="#555500";
             correctBtn.disabled = true;
+            correctBtn.style.backgroundColor="#005500";
             incorrectBtn.disabled = true;
+            incorrectBtn.style.backgroundColor="#550000";
             saveBtn.disabled = true;
+            saveBtn.style.backgroundColor="#555500";
             break;
         case states.STUDENT_REGISTERED:
             messageBoard.innerHTML = 'Student data was loaded. Load a list of verbs file and start the quiz anytime.';
             newStudentBtn.disabled = false;
+            newStudentBtn.style.backgroundColor="#DDDD00";
             loadBtn.disabled = false;
             loadListBtn.disabled = false;
             startBtn.disabled = false;
+            startBtn.style.backgroundColor="#DDDD00";
             showAnsBtn.disabled = true;
+            showAnsBtn.style.backgroundColor="#555500";
             correctBtn.disabled = true;
+            correctBtn.style.backgroundColor="#005500";
             incorrectBtn.disabled = true;
+            incorrectBtn.style.backgroundColor="#550000";
             saveBtn.disabled = true;
+            saveBtn.style.backgroundColor="#555500";
             break;
         case states.QUIZ_STARTED_NO_ANSWER:
             messageBoard.innerHTML = 'What are the past simple and past participle forms of the chosen verb?';
@@ -273,36 +285,54 @@ function stateMachine(currentState){
             console.log(shuffledIndex);
             showInfinitive(infinitiveAnswer, pastSimpleAnswer, pastParticipleAnswer, listOfVerbs, shuffledIndex);
             newStudentBtn.disabled = true;
+            newStudentBtn.style.backgroundColor="#555500";
             loadBtn.disabled = true;
             loadListBtn.disabled = true;
             startBtn.disabled = true;
+            startBtn.style.backgroundColor="#555500";
             showAnsBtn.disabled = false;
+            showAnsBtn.style.backgroundColor="#DDDD00";
             correctBtn.disabled = true;
+            correctBtn.style.backgroundColor="#005500";
             incorrectBtn.disabled = true;
+            incorrectBtn.style.backgroundColor="#550000";
             saveBtn.disabled = false;
+            saveBtn.style.backgroundColor="#DDDD00";
             break;
         case states.QUIZ_STARTED_ANSWER_SHOWN:
             messageBoard.innerHTML = 'Was the given answer correct or incorrect?';
             showPast(infinitiveAnswer, pastSimpleAnswer, pastParticipleAnswer, listOfVerbs, shuffledIndex);
             newStudentBtn.disabled = true;
+            newStudentBtn.style.backgroundColor="#555500";
             loadBtn.disabled = true;
             loadListBtn.disabled = true;
             startBtn.disabled = true;
+            startBtn.style.backgroundColor="#555500";
             showAnsBtn.disabled = true;
+            showAnsBtn.style.backgroundColor="#555500";
             correctBtn.disabled = false;
+            correctBtn.style.backgroundColor="#00DD00";
             incorrectBtn.disabled = false;
+            incorrectBtn.style.backgroundColor="#DD0000";
             saveBtn.disabled = false;
+            saveBtn.style.backgroundColor="#DDDD00";
             break;
         case states.NO_MORE_WORDS:
             messageBoard.innerHTML = 'There are no more words to show. Press SAVE AND FINISH to create a new quiz.';
             newStudentBtn.disabled = true;
+            newStudentBtn.style.backgroundColor="#555500";
             loadBtn.disabled = true;
             loadListBtn.disabled = true;
             startBtn.disabled = true;
+            startBtn.style.backgroundColor="#555500";
             showAnsBtn.disabled = true;
+            showAnsBtn.style.backgroundColor="#555500";
             correctBtn.disabled = true;
+            correctBtn.style.backgroundColor="#005500";
             incorrectBtn.disabled = true;
+            incorrectBtn.style.backgroundColor="#550000";
             saveBtn.disabled = false;
+            saveBtn.style.backgroundColor="#DDDD00";
             break;
     }
 }
