@@ -61,14 +61,21 @@ newStudentBtn.onclick = function(){
     loadBtn.value = null;
 
     //console.log("Botão clicado. Novo estudante será adicionado.");
-    aluno.name = 'Nome Legal';
-    aluno.words_learned = 20;
-    console.log(aluno);
-    studentName.innerHTML = aluno.name;
-    studentLearnedWords.innerHTML = aluno.words_learned;
+    let promptedName = prompt("What is the student's name?","Student Name");
+    let promptedWords = Number(prompt("How many verbs from the list does " + promptedName + " already know?", "1"));
 
-    // Signal to the state machine that there is a registered student
-    stateMachine(states.STUDENT_REGISTERED);
+    if(promptedName != "" && Number.isSafeInteger(promptedWords) && promptedWords > 0){
+        aluno.name = promptedName;
+        aluno.words_learned = promptedWords;
+        console.log(aluno);
+        studentName.innerHTML = aluno.name;
+        studentLearnedWords.innerHTML = aluno.words_learned;
+
+        // Signal to the state machine that there is a registered student
+        stateMachine(states.STUDENT_REGISTERED);
+    }else{
+        alert('Student name is empty or the number of words given was incorrect.');
+    } 
 };
 
 const listOfVerbs = []; // stores all verbs that are in the txt file loaded as verb list.
